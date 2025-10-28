@@ -33,8 +33,8 @@ A **minimal, self-contained demo** for recognising surgical phases in Cataract-1
 
 ```bash
 # 1 · Clone (Python ≥ 3.10)
-git clone https://github.com/matinmoqadas/eda.git
-cd eda
+git clone https://github.com/matinmoqadas/Cataract-101.git
+cd Cataract-101
 
 # 2 · Add the data (≈ 9 GB)
 #    https://ftp.itec.aau.at/datasets/ovid/cat-101/downloads/cataract-101.zip
