@@ -1,82 +1,40 @@
-\# Cataract-101 — Clip-Based Phase Classifier (Minimal Repo)
+# Cataract-101: Clip-Based Surgical Phase Classifier (Minimal Repo)
 
+This repository contains a very lightweight demo for recognizing surgical phases in cataract videos using a clip-based deep-learning model.
 
+## Folder Layout
 
-This repository contains a \*\*very lightweight demo\*\* for recognising surgical phases in cataract videos with a \*clip-based\* deep-learning model.
+- `Dataset/` - CSV metadata and dataset description (`Dataset/about.md`)
+- `cataract101_clip_classifier.ipynb` - single notebook covering training and inference
+- Additional experimental notebooks: `ms_tcn_train.ipynb`, `ms_tcn_full.ipynb`, `day*_ms-tcn*.ipynb`
 
+## Quick Start
 
+1. Clone the repo (tested with Python 3.10):
 
-\## 📂 Folder Layout
+   ```bash
+   git clone https://github.com/matinmoqadas/eda.git
+   cd eda
+   ```
 
+2. Obtain the Cataract-101 data and place the videos next to the CSV files inside `Dataset/`.
+   - Official download: https://ftp.itec.aau.at/datasets/ovid/cat-101/downloads/cataract-101.zip
 
+3. Open the notebook and run cells in Jupyter/Colab/Kaggle:
+   - `cataract101_clip_classifier.ipynb`
 
-Dataset/ # raw CSV metadata and this dataset description
+### What the notebook does
 
-cataract101\_clip\_classifier.ipynb # training \& inference demo in a single notebook
+- Builds a tiny PyTorch dataset of ~2-second clips
+- Trains a small 3D-ResNet (or loads `model.pt` if already trained)
+- Produces per-frame predictions and simple accuracy metrics
 
+## Dataset
 
+See `Dataset/about.md` for a concise description of the Cataract-101 dataset and the meaning of each CSV file (`videos.csv`, `phases.csv`, `annotations.csv`).
 
+## License
 
-
-\## 🚀 Quick Start
-
-
-
-1\. \*\*Clone\*\* the repo and install basic dependencies (tested with Python 3.10):
-
-&nbsp;  ```bash
-
-&nbsp;  git clone https://github.com/your-username/cataract101-clip-classifier.git
-
-&nbsp;  cd cataract101-clip-classifier
-
-&nbsp;  pip install -r requirements.txt   # optional: only if you add it
-
-
-
-
-
-Download videos from the official Cataract-101 release and place them next to the CSV files inside Dataset/.
-
-
-
-Open cataract101\_clip\_classifier.ipynb in Jupyter / Colab / Kaggle and run the cells.
-
-The notebook:
-
-
-
-builds a tiny PyTorch dataset of 2-second clips,
-
-
-
-trains a small 3D-ResNet (or loads model.pt if already trained),
-
-
-
-outputs per-frame predictions and simple accuracy metrics.
-
-
-
-📒 Dataset
-
-
-
-See Dataset/about.md for a concise description of the Cataract-101 dataset and the meaning of each CSV file.
-
-
-
-🔖 License
-
-
-
-The code is released under the MIT License. The Cataract-101 data follow their own license—please respect the original terms.
-
-
-
-
-
-
-
-
+- Code: MIT License
+- Data: governed by the original Cataract-101 license - please respect the source terms.
 
