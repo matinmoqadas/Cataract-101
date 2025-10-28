@@ -25,9 +25,8 @@ A **minimal, self-contained demo** for recognising surgical phases in Cataract-1
 │   ├── phases.csv
 │   ├── annotations.csv
 │   └── about.md
-└── cataract101_clip_classifier.ipynb
-```
-
+└── Cataract101_clip_classifier.ipynb
+└── Cataract101_MS-TCN_PhaseSegmentation.ipynb
 ---
 
 ## 3 Quick Start
@@ -37,12 +36,12 @@ A **minimal, self-contained demo** for recognising surgical phases in Cataract-1
 git clone https://github.com/matinmoqadas/eda.git
 cd eda
 
-# 2 · Add the data (≈ 3 GB)
+# 2 · Add the data (≈ 9 GB)
 #    https://ftp.itec.aau.at/datasets/ovid/cat-101/downloads/cataract-101.zip
 
 # 3 · Run the notebook (Jupyter / Colab / Kaggle)
-open cataract101_clip_classifier.ipynb
-```
+open Cataract101_clip_classifier.ipynb
+open Cataract101_MS-TCN_PhaseSegmentation.ipynb
 
 ---
 
