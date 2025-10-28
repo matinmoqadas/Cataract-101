@@ -1,40 +1,98 @@
-# Cataract-101: Clip-Based Surgical Phase Classifier (Minimal Repo)
+# Cataract-101 · Clip-Based Surgical Phase Classifier
 
-This repository contains a very lightweight demo for recognizing surgical phases in cataract videos using a clip-based deep-learning model.
+A **minimal, self-contained demo** for recognising surgical phases in Cataract-101 videos with an MS-TCN trained on short-clip features.
 
-## Folder Layout
+---
 
-- `Dataset/` - CSV metadata and dataset description (`Dataset/about.md`)
-- `cataract101_clip_classifier.ipynb` - single notebook covering training and inference
-- Additional experimental notebooks: `ms_tcn_train.ipynb`, `ms_tcn_full.ipynb`, `day*_ms-tcn*.ipynb`
+## 1 Overview
 
-## Quick Start
+| Component    | Description                                                            |
+| ------------ | ---------------------------------------------------------------------- |
+| **Input**    | `videos.csv`, `annotations.csv`, `phases.csv` from Cataract-101        |
+| **Features** | Pre-computed ResNet-50 or ViT embeddings (per frame / 2 s clip)        |
+| **Model**    | Multi-Stage TCN — *N* stages × 10 dilated 1-D conv layers              |
+| **Loss**     | Cross-entropy (frame labels) + temporal smoothing (MSE or MS-TCN loss) |
+| **Output**   | Per-frame predictions, metrics, and the best checkpoint                |
 
-1. Clone the repo (tested with Python 3.10):
+---
 
-   ```bash
-   git clone https://github.com/matinmoqadas/eda.git
-   cd eda
-   ```
+## 2 Repository Layout
 
-2. Obtain the Cataract-101 data and place the videos next to the CSV files inside `Dataset/`.
-   - Official download: https://ftp.itec.aau.at/datasets/ovid/cat-101/downloads/cataract-101.zip
+```text
+.
+├── Dataset/
+│   ├── videos.csv
+│   ├── phases.csv
+│   ├── annotations.csv
+│   └── about.md
+└── cataract101_clip_classifier.ipynb
+```
 
-3. Open the notebook and run cells in Jupyter/Colab/Kaggle:
-   - `cataract101_clip_classifier.ipynb`
+---
 
-### What the notebook does
+## 3 Quick Start
 
-- Builds a tiny PyTorch dataset of ~2-second clips
-- Trains a small 3D-ResNet (or loads `model.pt` if already trained)
-- Produces per-frame predictions and simple accuracy metrics
+```bash
+# 1 · Clone (Python ≥ 3.10)
+git clone https://github.com/matinmoqadas/eda.git
+cd eda
 
-## Dataset
+# 2 · Add the data (≈ 3 GB)
+#    https://ftp.itec.aau.at/datasets/ovid/cat-101/downloads/cataract-101.zip
 
-See `Dataset/about.md` for a concise description of the Cataract-101 dataset and the meaning of each CSV file (`videos.csv`, `phases.csv`, `annotations.csv`).
+# 3 · Run the notebook (Jupyter / Colab / Kaggle)
+open cataract101_clip_classifier.ipynb
+```
 
-## License
+---
 
-- Code: MIT License
-- Data: governed by the original Cataract-101 license - please respect the source terms.
+## 4 Notebook Workflow
 
+1. **Build** a tiny PyTorch dataset of ≈ 2 s clips
+2. **Train** a lightweight 3D-ResNet *or* load `model.pt` if present
+3. **Predict** per-frame phases and compute accuracy / mAP
+4. **Export** the best MS-TCN weights (`best_clip_model.pt`)
+
+---
+
+## 5 Outputs
+
+| Artifact                 | Contents                                                          |
+| ------------------------ | ----------------------------------------------------------------- |
+| **Per-epoch logs**       | Training / validation loss, accuracy, mAP                         |
+| **`best_clip_model.pt`** | Checkpoint with highest validation accuracy                       |
+| *(optional)* CSV / txt   | Predicted phase timelines per video (for F1@10/25/50, edit score) |
+
+### 5.1 Loading the Checkpoint
+
+```python
+from model import MSTCN
+import torch
+
+model = MSTCN(num_stages=4, num_layers=10, num_classes=10)
+state = torch.load("best_clip_model.pt")
+model.load_state_dict(state["state_dict"])
+model.eval()
+```
+
+---
+
+## 6 Dataset
+
+* **Kaggle mirror:** [https://www.kaggle.com/datasets/matinmo/cataract-101](https://www.kaggle.com/datasets/matinmo/cataract-101)
+* See `Dataset/about.md` for a concise description of the CSV schema.
+
+---
+
+## 7 Pre-trained Model
+
+* **12 h MS-TCN:** [https://www.kaggle.com/models/matinmo/clip-based-model](https://www.kaggle.com/models/matinmo/clip-based-model)
+
+---
+
+## 8 License
+
+| Asset    | License                                                          |
+| -------- | ---------------------------------------------------------------- |
+| **Code** | MIT                                                              |
+| **Data** | Original Cataract-101 license — please respect the source terms. |
