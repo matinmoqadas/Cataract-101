@@ -209,4 +209,4 @@ state = torch.load("best_clip_model.pt", map_location="cpu")
 | Asset | License |
 | ----- | ------- |
 | Code  | MIT     |
-| Data  | Original Cataract-101 license (respect the source terms) |
+| Data  | CC BY-NC 4.0 |
