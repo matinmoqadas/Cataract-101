@@ -1,30 +1,30 @@
-Cataract-101 — Dataset description
+# Cataract-101 Dataset
 
+Cataract-101 provides **101 anonymised cataract surgery videos** recorded in the operating theatre at **25 fps** with a resolution of **720×540 px**.
 
+| Item | Value |
+|------|-------|
+| Total videos | 101 |
+| Surgeons | 4 (2 residents, 2 experts) |
+| Average duration | ~10 min |
+| Resolution | 720 × 540 |
+| Frame rate | 25 fps |
+| Label schema | 7 surgical phases (frame-level) |
 
-Contents: A collection of 101 recorded cataract surgery videos with accompanying annotation files.
+### Phase distribution (approx. share of frames)
 
+| Phase | % of frames |
+|-------|-------------|
+| Phacoemulsification | **30 %** |
+| Irrigation & Aspiration | 13 % |
+| Viscoelastic Removal | 13 % |
+| Capsulorhexis | 9 % |
+| Others (remaining phases) | 35 % |
 
+Each CSV file in this folder is **self-contained**:
 
-Video format: 25 frames per second (FPS); typical resolution ~720 × 540 pixels.
+* **`videos.csv`** – video file names, duration, surgeon ID.  
+* **`annotations.csv`** – per-video frame‐level labels (`video_id, frame_idx, phase`).  
+* **`phases.csv`** – lookup table with numeric ID, phase name, and colour code for plots.
 
-
-
-Annotations: Frame-level phase annotations provided in CSV files (start/end or start-frame style) alongside metadata tables (e.g., videos.csv, phases.csv, annotations.csv).
-
-
-
-Phase classes: Ten labeled surgical phases (per-frame labels covering the whole procedure).
-
-
-
-Segments: Reconstructed segments table is included (annotated phase segments for each video).
-
-
-
-Surgeon metadata: Videos include multiple surgeons with different experience levels (four identified surgeons: two residents and two senior surgeons).
-
-
-
-Files included: Video files directory plus CSV metadata/annotation files packaged with the dataset.
-
+> The dataset is shared under the original Cataract-101 license. Please cite the authors if you use it in your research.
